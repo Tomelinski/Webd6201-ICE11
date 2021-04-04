@@ -1,17 +1,17 @@
 // importing 3rd party modules
-import createError = require("http-errors");
-import express = require("express");
-import path = require("path");
-import cookieParser = require("cookie-parser");
-import logger = require("morgan");
-import mongoose = require("mongoose");
+import createError from "http-errors";
+import express from "express";
+import path from "path";
+import cookieParser from "cookie-parser";
+import logger from "morgan";
+import mongoose from "mongoose";
 
 // app configuration
-const indexRouter = require("./Routes/index");
-const app = express();
+import * as indexRouter from "./Routes/index";
+export const app = express();
 
 // db configuration
-import DBConfig = require("./Config/db");
+import * as DBConfig from "./Config/db";
 mongoose.connect(DBConfig.Path, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "Client")));
 app.use(express.static(path.join(__dirname, "node_modules")));
 
-app.use("/", indexRouter);
+app.use("/", indexRouter.router);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -55,7 +55,13 @@ app.use(function (
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error", { message: message, error: error, title: "", page: "" });
+  res.render("error", {
+    message: message,
+    error: error,
+    title: "",
+    page: "",
+    displayName: "",
+  });
 });
 
-module.exports = app;
+//module.exports = app;

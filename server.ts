@@ -3,23 +3,26 @@
 /**
  * Module dependencies.
  */
-import createError = require("http-errors");
-const app = require("./app");
-let debug = require("debug")("week10a:server");
-let http = require("http");
+import createError from "http-errors";
+import * as AppConfig from "./app";
+import debug from "debug";
+debug("week10a:server");
+
+import http from "http";
 
 /**
  * Get port from environment and store in Express.
  */
 
 let port = normalizePort(process.env.PORT || "3000");
-app.set("port", port);
+
+AppConfig.app.set("port", port);
 
 /**
  * Create HTTP server.
  */
 
-let server = http.createServer(app);
+let server = http.createServer(AppConfig.app);
 
 /**
  * Listen on provided port, on all network interfaces.

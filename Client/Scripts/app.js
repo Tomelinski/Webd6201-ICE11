@@ -7,7 +7,10 @@ var core;
         $("#fullName").on("blur", function () {
             if (!fullNamePattern.test($(this).val().toString())) {
                 $(this).trigger("focus").trigger("select");
-                messageArea.show().addClass("alert alert-danger").text("Please enter a valid Full Name. This must include at least a Capitalized first name followed by a Capitlalized last name.");
+                messageArea
+                    .show()
+                    .addClass("alert alert-danger")
+                    .text("Please enter a valid Full Name. This must include at least a Capitalized first name followed by a Capitlalized last name.");
             }
             else {
                 messageArea.removeAttr("class").hide();
@@ -20,7 +23,10 @@ var core;
         $("#contactNumber").on("blur", function () {
             if (!contactNumberPattern.test($(this).val().toString())) {
                 $(this).trigger("focus").trigger("select");
-                messageArea.show().addClass("alert alert-danger").text("Please enter a valid Contact Number. Country code and area code are both optional");
+                messageArea
+                    .show()
+                    .addClass("alert alert-danger")
+                    .text("Please enter a valid Contact Number. Country code and area code are both optional");
             }
             else {
                 messageArea.removeAttr("class").hide();
@@ -33,7 +39,10 @@ var core;
         $("#emailAddress").on("blur", function () {
             if (!emailAddressPattern.test($(this).val().toString())) {
                 $(this).trigger("focus").trigger("select");
-                messageArea.show().addClass("alert alert-danger").text("Please enter a valid Email Address.");
+                messageArea
+                    .show()
+                    .addClass("alert alert-danger")
+                    .text("Please enter a valid Email Address.");
             }
             else {
                 messageArea.removeAttr("class").hide();
@@ -59,44 +68,11 @@ var core;
                     localStorage.setItem(key, contact.serialize());
                 }
             }
-            location.href = '/contact';
+            location.href = "/contact";
         });
     }
     function displayContactList() {
         authGuard();
-        if (localStorage.length > 0) {
-            let contactList = document.getElementById("contactList");
-            let data = "";
-            let keys = Object.keys(localStorage);
-            let index = 1;
-            for (const key of keys) {
-                let contactData = localStorage.getItem(key);
-                let contact = new core.Contact();
-                contact.deserialize(contactData);
-                data += `<tr>
-          <th scope="row" class="text-center">${index}</th>
-          <td>${contact.FullName}</td>
-          <td>${contact.ContactNumber}</td>
-          <td>${contact.EmailAddress}</td>
-          <td class="text-center"><button value="${key}" class="btn btn-primary btn-sm edit"><i class="fas fa-edit fa-sm"></i> Edit</button></td>
-          <td class="text-center"><button value="${key}" class="btn btn-danger btn-sm delete"><i class="fas fa-trash-alt fa-sm"></i> Delete</button></td>
-          </tr>`;
-                index++;
-            }
-            contactList.innerHTML = data;
-            $("button.edit").on("click", function () {
-                location.href = '/edit';
-            });
-            $("button.delete").on("click", function () {
-                if (confirm("Are you sure?")) {
-                    localStorage.removeItem($(this).val().toString());
-                }
-                location.href = '/contact-list';
-            });
-        }
-        $("#addButton").on("click", function () {
-            location.href = '/edit';
-        });
     }
     function displayLogin() {
         let messageArea = $("#messageArea");
@@ -108,7 +84,8 @@ var core;
             let newUser = new core.User();
             $.get("./Data/users.json", function (data) {
                 for (const user of data.users) {
-                    if (username.val() == user.Username && password.val() == user.Password) {
+                    if (username.val() == user.Username &&
+                        password.val() == user.Password) {
                         newUser.fromJSON(user);
                         success = true;
                         break;
@@ -121,48 +98,50 @@ var core;
                 }
                 else {
                     username.trigger("focus").trigger("select");
-                    messageArea.show().addClass("alert alert-danger").text("Error: Invalid login information");
+                    messageArea
+                        .show()
+                        .addClass("alert alert-danger")
+                        .text("Error: Invalid login information");
                 }
             });
         });
         $("#cancelButton").on("click", function () {
             document.forms[0].reset();
-            location.href = '/home';
+            location.href = "/home";
         });
     }
     function performLogout() {
         sessionStorage.clear();
-        location.href = '/login';
+        location.href = "/login";
     }
     function authGuard() {
         if (!sessionStorage.getItem("user")) {
-            location.href = '/login';
+            location.href = "/login";
         }
     }
-    function display404() {
-    }
+    function display404() { }
     function Start() {
         let pageID = $("body")[0].getAttribute("id");
         switch (pageID) {
-            case 'home':
+            case "home":
                 break;
-            case 'about':
+            case "about":
                 break;
-            case 'services':
+            case "services":
                 break;
-            case 'projects':
+            case "projects":
                 break;
-            case 'contact':
+            case "contact":
                 displayContact();
                 break;
-            case 'login':
+            case "login":
                 displayLogin();
                 break;
-            case 'logout':
+            case "logout":
                 performLogout();
-            case 'register':
+            case "register":
                 break;
-            case 'contact-list':
+            case "contact-list":
                 displayContactList();
                 break;
         }
