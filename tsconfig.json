@@ -7,6 +7,7 @@
         "noImplicitAny": true,
         "alwaysStrict": true,
         "removeComments": true,
-        "moduleResolution": "Node"
+        "moduleResolution": "Node",
+        "esModuleInterop": true
     }
 }

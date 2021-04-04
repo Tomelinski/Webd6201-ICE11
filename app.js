@@ -8,7 +8,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const indexRouter = require("./Routes/index");
 const app = express();
-let DBConfig = require("./Config/db");
+const DBConfig = require("./Config/db");
 mongoose.connect(DBConfig.Path, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
