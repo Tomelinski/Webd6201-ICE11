@@ -136,6 +136,13 @@ exports.router.post("/add", function (req, res, next) {
     });
 });
 exports.router.get("/delete/:id", function (req, res, next) {
-    res.redirect("/contact-list");
+    let id = req.params.id;
+    Contact.remove({ _id: id }, (err) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.redirect("/contact-list");
+    });
 });
 //# sourceMappingURL=index.js.map
