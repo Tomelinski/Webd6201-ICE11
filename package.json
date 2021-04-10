@@ -1,9 +1,9 @@
 {
-  "name": "webd6201-ice10",
+  "name": "webd6201-ice11",
   "version": "1.0.0",
-  "description": "Demo Site for ICE 10",
+  "description": "Demo Site for ICE 11",
   "main": "server.js",
-  "repository": "https://github.com/Tomelinski/Webd6201-ICE10.git",
+  "repository": "https://github.com/Tomelinski/Webd6201-ICE11.git",
   "author": "Tomelinski <tomzielinski@live.ca>",
   "license": "MIT",
   "engines": {

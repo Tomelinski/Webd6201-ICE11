@@ -1,3 +1,3 @@
-# WEBD6201-ICE10
+# WEBD6201-ICE11
 
-This is a demo project for ICE 10
+This is a demo project for ICE 11
