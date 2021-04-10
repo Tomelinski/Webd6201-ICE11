@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 import createError from "http-errors";
-import * as AppConfig from "./Server/Config/app";
+import app from "./Server/Config/app";
 import debug from "debug";
 debug("week10a:server");
 
@@ -16,13 +16,13 @@ import http from "http";
 
 let port = normalizePort(process.env.PORT || "3000");
 
-AppConfig.app.set("port", port);
+app.set("port", port);
 
 /**
  * Create HTTP server.
  */
 
-let server = http.createServer(AppConfig.app);
+let server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
