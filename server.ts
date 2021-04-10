@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 import createError from "http-errors";
-import * as AppConfig from "./app";
+import * as AppConfig from "./Server/Config/app";
 import debug from "debug";
 debug("week10a:server");
 
