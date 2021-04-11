@@ -89,9 +89,6 @@ namespace core {
   }
 
   function displayContactList(): void {
-    // don't allow visitors to go here
-    authGuard();
-
     // confirm deletion
     $("a.delete").on("click", function (event) {
       if (!confirm("Are you sure?")) {
@@ -106,74 +103,10 @@ namespace core {
     formValidation();
   }
 
-  function displayLogin(): void {
-    let messageArea = $("#messageArea");
-    messageArea.hide();
+  function displayLogin(): void {}
 
-    $("#loginButton").on("click", function () {
-      let username = $("#username");
-      let password = $("#password");
-      let success = false;
-      let newUser = new core.User();
+  function displayRegister(): void {}
 
-      // use ajax to access the json file
-      $.get("./Data/users.json", function (data) {
-        // check each user in the users.json file  (linear search)
-        for (const user of data.users) {
-          if (
-            username.val() == user.Username &&
-            password.val() == user.Password
-          ) {
-            newUser.fromJSON(user);
-            success = true;
-            break;
-          }
-        }
-
-        // if username and password matches - success... then perform login
-        if (success) {
-          // add user to session storage
-          sessionStorage.setItem("user", newUser.serialize());
-
-          // hide any error message
-          messageArea.removeAttr("class").hide();
-
-          $("form").trigger("submit");
-        } else {
-          // display an error message
-          username.trigger("focus").trigger("select");
-          messageArea
-            .show()
-            .addClass("alert alert-danger")
-            .text("Error: Invalid login information");
-        }
-      });
-    });
-
-    $("#cancelButton").on("click", function () {
-      // clear the login form
-      document.forms[0].reset();
-      location.href = "/home";
-    });
-  }
-
-  function performLogout(): void {
-    sessionStorage.clear();
-    location.href = "/login";
-  }
-
-  function authGuard(): void {
-    if (!sessionStorage.getItem("user")) {
-      location.href = "/login";
-    }
-  }
-
-  function display404(): void {}
-
-  /**
-   * This is the entry point for our program
-   *
-   */
   function Start(): void {
     let pageID = $("body")[0].getAttribute("id");
 
@@ -187,9 +120,8 @@ namespace core {
       case "login":
         displayLogin();
         break;
-      case "logout":
-        performLogout();
       case "register":
+        displayRegister();
         break;
       case "contact-list":
         displayContactList();

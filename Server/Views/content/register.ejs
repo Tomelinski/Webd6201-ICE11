@@ -2,12 +2,19 @@
     <div class="offset-md-3 col-md-6 col-sm-12">
           <div class="login" id="contentArea">
               <h1 class="display-4">Register</h1>
-              <div id="messageArea"></div>
+              
+              <% if(messages.length> 0) { %>
+                <div id="messageArea" class="alert alert-danger">
+                  <%= messages %>
+                </div>
+                <% } %>
 
-              <form id="registerForm" novalidate>
+
+              <form method="POST" id="registerForm" novalidate>
                 <p class="hint-text">Create your own account. It's free and only takes a minute.</p>
                 <div class="form-group">
                   <div class="row">
+                    <p class="lead"><i class="fas fa-user-shield"></i> Personal Information</p>
                     <div class="col-md-6">
                       <input class="form-control" type="text" name="firstName" id="firstName" placeholder="First Name" required>
                     </div>
@@ -22,12 +29,21 @@
                   <div class="row">
                     <div class="col-md-12">
                       <input type="email" class="form-control" id="emailAddress" name="emailAddress" required
-                      value="" placeholder="Email">
+                      value="" placeholder="Email Address">
                     </div>
                   </div>
                   
                 </div>
-
+                
+                <div class="form-group mt-4">
+                  <div class="row">
+                    <p class="lead"><i class="fas fa-database"></i>System Identification</p>
+                    <div class="col-md-12">
+                      <input type="text" class="form-control" id="username" name="username" required value="" placeholder="Username">
+                    </div>
+                  </div>
+                </div>
+                
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-12">
@@ -37,6 +53,7 @@
                   </div>
                   
                 </div>
+
 
                 <div class="form-group">
                   <div class="row">
