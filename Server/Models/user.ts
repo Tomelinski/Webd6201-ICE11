@@ -1,6 +1,6 @@
 import mongoose, { PassportLocalSchema } from "mongoose";
 const Schema = mongoose.Schema;
-import passportLocalMongoose from 'passport-local-mongoose';
+import passportLocalMongoose from "passport-local-mongoose";
 
 const UserSchema = new Schema(
   {
@@ -8,20 +8,20 @@ const UserSchema = new Schema(
     EmailAddress: String,
     DisplayName: String,
     created: {
-        type: Date,
-        default: Date.now();
+      type: Date,
+      default: Date.now(),
     },
     updated: {
-        type: Date,
-        default: Date.now();
-    }
+      type: Date,
+      default: Date.now(),
+    },
   },
   {
     collection: "users",
   }
 );
 
-UserSchema.plugin(passportLocalMongoose)
+UserSchema.plugin(passportLocalMongoose);
 
-const Model = mongoose.model("User", UserSchema);
+const Model = mongoose.model("User", UserSchema as PassportLocalSchema);
 export default Model;

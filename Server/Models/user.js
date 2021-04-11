@@ -12,12 +12,12 @@ const UserSchema = new Schema({
     DisplayName: String,
     created: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
     },
     updated: {
         type: Date,
-        default: Date.now()
-    }
+        default: Date.now(),
+    },
 }, {
     collection: "users",
 });
